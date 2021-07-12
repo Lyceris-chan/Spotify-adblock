@@ -12,6 +12,9 @@ set originalDir=%cd%
 rem Change directory into %appdata%/Spotify
 cd %appdata%/Spotify
 
+rem Delete the old libcefNative.dll (renamed original libcef.dll) to prevent crashes after an update
+if exist libcefNative.dll del /f /q libcefNative.dll
+
 rem Rename libcef.dll to libcefNative.dll
 ren libcef.dll libcefNative.dll
 
