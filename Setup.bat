@@ -6,11 +6,8 @@ powershell.exe Invoke-WebRequest -Uri https://github.com/moadfakhri/SpotifyAdBlo
 rem Extract the latest version of SpotifyAdBlocker-x86
 powershell.exe Expand-Archive -Force SpotifyAdBlocker-x86.zip SpotifyAdBlocker-x86
 
-rem Save current directory as a variable
-set originalDir=%cd%
-
-rem Change directory into %appdata%/Spotify
-cd %appdata%/Spotify
+rem Change directory into "%appdata%/Spotify"
+cd "%appdata%/Spotify"
 
 rem Delete the old libcefNative.dll (renamed original libcef.dll) to prevent crashes after an update
 if exist libcefNative.dll del /f /q libcefNative.dll
@@ -19,16 +16,16 @@ rem Rename libcef.dll to libcefNative.dll
 ren libcef.dll libcefNative.dll
 
 rem Go back to the original directory the user executed the script from
-cd %originalDir%
+cd "%~dp0"
 
 rem Change directory into the folder we executed the latest SpotifyAdBlocker-x86 in
-cd %originalDir%/SpotifyAdBlocker-x86
+cd "%~dp0/SpotifyAdBlocker-x86"
 
-rem Move the modded libcef.dll to %appdata%/Spotify/
-move libcef.dll %appdata%/Spotify
+rem Move the modded libcef.dll to "%appdata%/Spotify/"
+move libcef.dll "%appdata%/Spotify"
 
-rem Go back to the %originalDir%
-cd %originalDir%
+rem Go back to the "%~dp0"
+cd "%~dp0"
 
 rem Cleanup temporary files
 del SpotifyAdBlocker-x86.zip
